@@ -1,5 +1,7 @@
+import WebSocketClient from "./WebSocket";
+
 function App() {
-  return <div className="App">성공!!</div>;
+  return <WebSocketClient></WebSocketClient>
 }
 
 export default App;
