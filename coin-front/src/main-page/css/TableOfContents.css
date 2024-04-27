@@ -1,0 +1,55 @@
+.header {
+    margin: 0 auto;
+    width: 1000px;
+    height: 50px;
+    position: relative;
+    border-top: 1px #F1F3F6 solid;
+    border-bottom: 1px #F1F3F6 solid;
+}
+  
+.header > .cell {
+    text-align: end;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 50px;
+    position: absolute;
+    color: #9196A1;
+    word-wrap: break-word;
+}
+
+.cell:nth-child(1) {
+    text-align: center;
+    width: 30px;
+}
+  
+.header > .cell:nth-child(1) {
+    left: 10px;
+}
+
+.cell:nth-child(2) {
+    text-align: start;
+    left: 100px;
+    width: 300px;
+}
+  
+.cell:nth-child(3) {
+    left: 350px;
+    width: 180px;
+}
+  
+.cell:nth-child(4) {
+    left: 550px;
+    width: 180px;
+}
+  
+.cell:nth-child(5) {
+    left: 780px;
+    width: 100px;
+}
+
+.cell:nth-child(6) {
+    left: 900px;
+    width: 80px;
+}
+  
