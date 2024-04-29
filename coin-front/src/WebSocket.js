@@ -6,7 +6,7 @@ function WebSocketClient() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = new WebSocket("ws://172.30.92.184:8080/socket");
+    const newSocket = new WebSocket("ws://172.30.92.184:8080/coin-list");
 
     newSocket.onopen = () => {
       console.log("WebSocket connected");

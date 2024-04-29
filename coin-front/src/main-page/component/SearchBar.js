@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import '../css/SearchBar.css';
+//import { getCoinList } from "../CoinList.js"
+import MainPageSocket from "../MainPageSocket"
 
-function SearchBar({list, setList}){
+function SearchBar({setList}){
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleInputChange = (event) => {
@@ -11,17 +13,22 @@ function SearchBar({list, setList}){
   };
 
   const handleSearch = () => {
-    if (searchTerm.trim() === '') {
-      window.location.reload();
-    }
 
-    const filteredList = list.filter(item => {
-      const tickerMatch = item.ticker.toLowerCase().includes(searchTerm.toLowerCase());
-      const nameMatch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
-      return tickerMatch || nameMatch;
-    });
+    const handleReceivedMessage = (data) => {
+      if (searchTerm.trim() === '') {
+        setList(JSON.parse(data));
+      };
 
-    setList(filteredList);
+      const filteredList = JSON.parse(data).filter(item => {
+            const tickerMatch = item.ticker.toLowerCase().includes(searchTerm.toLowerCase());
+            const nameMatch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+            return tickerMatch || nameMatch;
+          });
+          setList(filteredList);
+    };
+
+    MainPageSocket(handleReceivedMessage);
+  
   };
 
   return (

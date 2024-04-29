@@ -10,7 +10,7 @@ const TableOfContents = () => {
         <div className="cell">국내 가격</div>
         <div className="cell">해외 가격</div>
         <div className="cell">시세차이(KRW)</div>
-        <div className="cell">시세차이</div>
+        <div className="cell">시세차율(%)</div>
       </div>
     </div>
   );

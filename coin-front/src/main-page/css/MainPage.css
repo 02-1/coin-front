@@ -1,0 +1,12 @@
+.spinner {
+    animation: spin 1s infinite linear; /* 스피너를 1초 동안 회전시키고 무한히 반복 */
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg); /* 회전 각도를 0도부터 시작 */
+    }
+    to {
+      transform: rotate(360deg); /* 회전 각도를 360도로 끝냄 */
+    }
+  }
