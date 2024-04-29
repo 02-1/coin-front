@@ -1,34 +1,38 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import '../css/SearchBar.css';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import "../css/SearchBar.css";
+import {getCoinList} from "../MainPageFetch";
 //import { getCoinList } from "../CoinList.js"
-import MainPageSocket from "../MainPageSocket"
+//import MainPageSocket from "../MainPageSocket";
 
-function SearchBar({setList}){
-  const [searchTerm, setSearchTerm] = useState('');
+function SearchBar({ setList, setLoading}) {
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
+    setLoading(true);
+    const list = await getCoinList();
 
-    const handleReceivedMessage = (data) => {
-      if (searchTerm.trim() === '') {
-        setList(JSON.parse(data));
-      };
+    if (searchTerm.trim() === "") {
+          setList(list);
+          setLoading(false);
+    }
 
-      const filteredList = JSON.parse(data).filter(item => {
-            const tickerMatch = item.ticker.toLowerCase().includes(searchTerm.toLowerCase());
-            const nameMatch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
-            return tickerMatch || nameMatch;
-          });
-          setList(filteredList);
-    };
-
-    MainPageSocket(handleReceivedMessage);
-  
+    const filteredList = list.filter((item) => {
+      const tickerMatch = item.ticker
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const nameMatch = item.name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      return tickerMatch || nameMatch;
+    });
+    setList(filteredList);
+    setLoading(false);
   };
 
   return (
@@ -42,11 +46,11 @@ function SearchBar({setList}){
           onChange={handleInputChange}
         />
         <button className="search-button" onClick={handleSearch}>
-        <FontAwesomeIcon icon={faSearch} />
-      </button>
-      </div>  
+          <FontAwesomeIcon icon={faSearch} />
+        </button>
+      </div>
     </div>
   );
-};
+}
 
 export default SearchBar;

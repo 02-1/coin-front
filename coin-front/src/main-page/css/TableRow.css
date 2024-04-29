@@ -1,7 +1,7 @@
 .coin-table-row {
   margin: 0 auto;
   width: 1000px;
-  border-bottom: 1px #F1F3F6 solid;
+  border-bottom: 1px #f1f3f6 solid;
 }
 
 .cells {
@@ -10,15 +10,15 @@
   position: relative;
 }
 
-.positive-gap{
-  color: #FF5C5C;
+.positive-gap {
+  color: #ff5c5c;
 }
 
-.negative-gap{
-  color: #467CF1;
+.negative-gap {
+  color: #467cf1;
 }
-  
-.cells> .cell {
+
+.cells > .cell {
   position: absolute;
   text-align: end;
   height: 40px;
@@ -28,11 +28,11 @@
   word-wrap: break-word;
 }
 
-.coin-table-row .cell:nth-child(1){
+.coin-table-row .cell:nth-child(1) {
   margin-left: 10px;
 }
 
-.coin-table-row .cell:nth-child(2){
+.coin-table-row .cell:nth-child(2) {
   display: flex;
 }
 
