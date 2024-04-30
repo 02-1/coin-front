@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "../css/SearchBar.css";
 import {getCoinList} from "../MainPageFetch";
-//import { getCoinList } from "../CoinList.js"
-//import MainPageSocket from "../MainPageSocket";
 
 function SearchBar({ setList, setLoading}) {
   const [searchTerm, setSearchTerm] = useState("");
