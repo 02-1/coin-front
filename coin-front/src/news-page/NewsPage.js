@@ -1,11 +1,10 @@
 import DefaultPage from "../common/default-page/DefaultPage";
-
-function DetailPage() {
+function NewsPage() {
   return (
-    <>
+    <div>
       <DefaultPage />
-      details
-    </>
+      <div>news</div>
+    </div>
   );
 }
-export default DetailPage;
+export default NewsPage;

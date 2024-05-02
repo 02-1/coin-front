@@ -1,0 +1,18 @@
+.btn_container{
+    width: 100px;
+    background-color: #e4e5e7;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #bfbfbf;
+    border-radius: 30px;
+    transition: 0.2s;
+    font-weight: 600;
+    color: #898989;
+
+}
+.btn_container:hover{
+    background-color: #bfbfbf;
+    cursor: pointer;
+    color: white;
+
+}
