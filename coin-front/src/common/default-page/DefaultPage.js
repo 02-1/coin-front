@@ -1,8 +1,11 @@
+import Appbar from "./component/Appbar";
+import Top from "./component/Top";
+
 function DefaultPage() {
   return (
     <div>
-      <div className="appbar">appbar</div>
-      <div className="top">top</div>
+      <Appbar />
+      <Top />
     </div>
   );
 }

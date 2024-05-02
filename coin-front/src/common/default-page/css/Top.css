@@ -1,0 +1,14 @@
+.top{
+    width: 800px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+}
+.current-price{
+    font-size: 24px;
+    font-weight: 600;
+    color: black;
+}
+.button{
+    display: flex;
+}

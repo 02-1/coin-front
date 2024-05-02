@@ -1,13 +1,13 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import "../css/CustomButton.css";
 
-const CustomButton = (props) => {
-  const { text, onClick } = props;
+const CustomButton = ({ text, onClick }) => {
   return (
     <div className="btn_container" onClick={onClick}>
       {text || "null"}
     </div>
   );
 };
+
 export default CustomButton;

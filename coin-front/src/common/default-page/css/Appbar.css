@@ -1,0 +1,37 @@
+.coin-icon{
+    
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+}
+.container{
+    display: flex;
+    align-items: center;
+}
+.home_icon{
+    margin-left: 25px;
+    width: 30px;
+    height: 30px;
+    color: #3E4045;
+    transition: transform 0.2s ease; /* 변화가 일어날 때 부드럽게 처리될 수 있도록 transition 속성 추가 */
+}
+.home_icon:hover{
+    cursor: pointer;
+    transform: translateX(-5px); /* 호버 시 요소를 위로 5px 이동 */
+}
+.appbar{
+    left: 15%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+}
+.text{
+    margin-left: 0.5em;
+    font-size: 32px;
+    font-weight: 800;
+    color: black;
+}
+hr{
+    border: rgba(223, 223, 223, 0.531) 0.5px solid;
+}
