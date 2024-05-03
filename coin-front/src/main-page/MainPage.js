@@ -32,7 +32,6 @@ function MainPage() {
 
     if (autoRefreshEnabled) {
       intervalId = setInterval(() => {
-        setLoading(true);
         getList();
         console.log("새로고침")
       }, 10000);
