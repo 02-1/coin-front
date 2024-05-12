@@ -43,23 +43,27 @@ function MainPage() {
   }, []);
 
   useEffect(() => {
-    const filteredList = list.filter((item) => {
-      const tickerMatch = item.ticker
-        .toLowerCase()
-        .includes(search.toLowerCase());
-      const nameMatch = item.name.toLowerCase().includes(search.toLowerCase());
-      return tickerMatch || nameMatch;
-    });
-
-    setFilteredList(filteredList);
+    try{
+      const filteredList = list.filter((item) => {
+        const tickerMatch = item.ticker
+          .toLowerCase()
+          .includes(search.toLowerCase());
+        const nameMatch = item.name.toLowerCase().includes(search.toLowerCase());
+        return tickerMatch || nameMatch;
+      });
+  
+      setFilteredList(filteredList);
+    }catch{
+      console.log("서버 오류났다구")
+    }
+    
   }, [search, list]);
 
   useEffect(() => {
     
     const nonNullKey = Object.keys(order).find(key => order[key] !== null);
     const orderType = nonNullKey || null;
-    
-    console.log(orderType);
+
     if (orderType !== null) {
       filteredList.sort((a, b) => {
         switch (orderType) {

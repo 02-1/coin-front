@@ -57,6 +57,16 @@
   width: 100px;
 }
 
+.coin-table-row .cell:nth-child(5) {
+  left: 770px;
+  width: 120px;
+}
+
+.coin-table-row .cell:nth-child(6) {
+  left: 890px;
+  width: 100px;
+}
+
 .arrow-none{
   color: white;
 }
