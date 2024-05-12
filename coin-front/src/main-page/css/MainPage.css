@@ -60,3 +60,25 @@ label {
 [type="checkbox"]:enabled:hover {
   box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
 }
+
+.option {
+  width:980px;
+  justify-content: flex-end;
+  color: #9196a1;
+  display: flex;
+}
+
+.option .rating {
+  overflow: hidden;
+  width: 100px;
+  margin-left: 10px;
+}
+
+.option .rating span {
+  font-size: 14px;
+}
+
+.table-container {
+  margin: 0 auto;
+  width: 1000px;
+}

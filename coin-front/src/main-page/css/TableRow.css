@@ -28,6 +28,12 @@
   word-wrap: break-word;
 }
 
+.icon-container{
+  height: 60px;
+  overflow: hidden;
+  justify-content: center;
+}
+
 .coin-table-row .cell:nth-child(1) {
   margin-left: 10px;
 }
@@ -37,9 +43,8 @@
 }
 
 .coin-icon {
-  margin: 16px 0;
-  width: 28px;
-  height: 28px;
+  object-fit: contain;
+  max-width: 38px;
   border-radius: 14px;
 }
 

@@ -17,6 +17,7 @@ function Appbar() {
         <div className="appbar">
           <img
             src={"https://static.upbit.com/logos/BTC.png"}
+            alt="BTC"
             className="coin-icon"
           />
           <div className="text">비트코인(BTC)</div>

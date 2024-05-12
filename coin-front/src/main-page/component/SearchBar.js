@@ -1,36 +1,10 @@
-import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "../css/SearchBar.css";
-import {getCoinList} from "../MainPageFetch";
 
-function SearchBar({ setList, setLoading}) {
-  const [searchTerm, setSearchTerm] = useState("");
-
+function SearchBar({ search, setSearch }) {
   const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearch = async () => {
-    setLoading(true);
-    const list = await getCoinList();
-
-    if (searchTerm.trim() === "") {
-          setList(list);
-          setLoading(false);
-    }
-
-    const filteredList = list.filter((item) => {
-      const tickerMatch = item.ticker
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const nameMatch = item.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      return tickerMatch || nameMatch;
-    });
-    setList(filteredList);
-    setLoading(false);
+    setSearch(event.target.value);
   };
 
   return (
@@ -40,10 +14,10 @@ function SearchBar({ setList, setLoading}) {
           type="text"
           placeholder="코인명/심볼검색"
           className="search-input"
-          value={searchTerm}
+          value={search}
           onChange={handleInputChange}
         />
-        <button className="search-button" onClick={handleSearch}>
+        <button className="search-button">
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
