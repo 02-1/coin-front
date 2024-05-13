@@ -5,7 +5,7 @@ function DefaultPage({rowData}) {
   return (
     <div>
       <Appbar {...rowData}/>
-      <Top />
+      <Top ticker={rowData.tocker}/>
     </div>
   );
 }
