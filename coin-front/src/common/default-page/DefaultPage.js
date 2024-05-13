@@ -4,8 +4,8 @@ import Top from "./component/Top";
 function DefaultPage({rowData}) {
   return (
     <div>
-      <Appbar {...rowData}/>
-      <Top ticker={rowData.tocker}/>
+      <Appbar rowData={rowData}/>
+      <Top rowData={rowData}/>
     </div>
   );
 }
