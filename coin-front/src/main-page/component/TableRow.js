@@ -12,14 +12,19 @@ const TableRow = ({
   price_upbit,
   price_gap,
   gap_percent,
+  onClick,
 }) => {
   const icon = gap_percent >= 0 ? faCaretUp : faCaretDown;
   const gapClass = gap_percent >= 0 ? "positive-gap" : "negative-gap";
   const formattedGapPercent =
     gap_percent >= 0 ? gap_percent.toFixed(2) : -gap_percent.toFixed(2);
 
+  const handleRowClick = () => {
+    onClick({ img_link, ticker, name, price_upbit });
+  };
+
   return (
-    <div className="coin-table-row">
+    <div className="coin-table-row" onClick={handleRowClick}>
       <div className="cells">
         <div className="cell">{id}</div>
         <div className="cell">

@@ -5,9 +5,7 @@ import Layout from "../Layout";
 import getInitialDataList from "../utils/getInitialDataList";
 import getColors from "../utils/getColors";
 
-const market = "BTC";
-
-const CoinChart = () => {
+const CoinChart = ({name, ticker}) => {
   const [selectedItem, setSelectedItem] = useState("분봉");
   const [selectedLocation, setSelectedLocation] = useState("국내");
 
@@ -28,7 +26,7 @@ const CoinChart = () => {
       const dataList = await getInitialDataList({
         selectedItem,
         selectedLocation,
-        market,
+        ticker,
       });
       chart.applyNewData(dataList);
     };
@@ -40,7 +38,7 @@ const CoinChart = () => {
         dispose(chart);
       }
     };
-  }, [selectedItem, selectedLocation]);
+  }, [selectedItem, selectedLocation, ticker]);
 
   return (
     <div>
@@ -67,7 +65,7 @@ const CoinChart = () => {
           ))}
         </select>
       </div>
-      <Layout title="Bitcoin Chart">
+      <Layout title={`${name} Chart`}>
         <div id="coin-chart" className="coin-chart" />
       </Layout>
     </div>

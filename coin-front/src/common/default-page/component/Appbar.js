@@ -1,7 +1,7 @@
 import "../css/Appbar.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-function Appbar() {
+function Appbar({img_link, name, ticker}) {
   const navigate = useNavigate();
 
   const handleClick = (path) => {
@@ -16,11 +16,11 @@ function Appbar() {
         />
         <div className="appbar">
           <img
-            src={"https://static.upbit.com/logos/BTC.png"}
-            alt="BTC"
+            src={img_link}
+            alt={ticker}
             className="coin-icon"
           />
-          <div className="text">비트코인(BTC)</div>
+          <div className="text">{name}({ticker})</div>
         </div>
       </div>
       <hr />

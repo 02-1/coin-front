@@ -1,10 +1,10 @@
 import Appbar from "./component/Appbar";
 import Top from "./component/Top";
 
-function DefaultPage() {
+function DefaultPage({rowData}) {
   return (
     <div>
-      <Appbar />
+      <Appbar {...rowData}/>
       <Top />
     </div>
   );

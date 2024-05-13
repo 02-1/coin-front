@@ -15,7 +15,7 @@ const interval = {
 const getInitialDataList = async ({
   selectedItem,
   selectedLocation,
-  market,
+  ticker,
 }) => {
   try {
     let arr;
@@ -26,7 +26,7 @@ const getInitialDataList = async ({
         }`,
         {
           params: {
-            market: "KRW-" + market,
+            market: "KRW-" + ticker,
             to: new Date(+new Date() + 3240 * 10000)
               .toISOString()
               .replace("T", " ")
@@ -68,8 +68,7 @@ const getInitialDataList = async ({
       });
       return arr.reverse();
     } else {
-      let rating = 1366.91; // rating 변수를 try 블록 밖으로 끌어옴
-      console.log(process.env.REACT_APP_IP)
+      let rating = 1366.91;
       try {
         const response = await fetch(`http://${process.env.REACT_APP_IP}/exchange-rate`);
         const body = await response.json();
@@ -83,7 +82,7 @@ const getInitialDataList = async ({
         }`,
         {
           params: {
-            symbol: market + "USDT",
+            symbol: ticker + "USDT",
             interval: interval[selectedItem],
             limit: 200, //최대 개수 수정? 일단 upbit가 200개까지라 얘도 200 but 1000까지 가능
           },
