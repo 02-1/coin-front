@@ -1,8 +1,8 @@
 .header {
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   margin: 0 auto;
   width: 1000px;
   height: 50px;
@@ -47,6 +47,16 @@
   width: 180px;
 }
 
+.coin-table-row .cell:nth-child(3) {
+  left: 340px;
+  width: 180px;
+}
+
+.coin-table-row .cell:nth-child(4) {
+  left: 540px;
+  width: 180px;
+}
+
 .cell:nth-child(5) {
   left: 780px;
   width: 120px;
@@ -67,6 +77,6 @@
   width: 100px;
 }
 
-.arrow-none{
+.arrow-none {
   color: white;
 }

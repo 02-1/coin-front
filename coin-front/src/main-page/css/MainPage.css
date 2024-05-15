@@ -62,9 +62,14 @@ label {
 }
 
 .option {
-  width:980px;
-  justify-content: flex-end;
+  font-size: 14px;
+  width:1000px;
+  display: flex;
+  justify-content: space-between;
   color: #9196a1;
+}
+
+.option-right {
   display: flex;
 }
 
@@ -81,4 +86,14 @@ label {
 .table-container {
   margin: 0 auto;
   width: 1000px;
+}
+
+.refreshTime{
+  text-align: right;
+  border: none;
+  width: 15px;
+}
+
+.clock{
+  margin-left: 20px;
 }

@@ -2,25 +2,27 @@ import React from "react";
 import "../css/TableRow.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { toFormattedString } from "../../Format";
 
 const TableRow = ({
   id,
   img_link,
   ticker,
   name,
+  price_bithumb,
   price_binance,
-  price_upbit,
   price_gap,
   gap_percent,
   onClick,
+  averageGapPercent
 }) => {
   const icon = gap_percent >= 0 ? faCaretUp : faCaretDown;
-  const gapClass = gap_percent >= 0 ? "positive-gap" : "negative-gap";
+  const gapClass = gap_percent >= averageGapPercent ? "positive-gap" : "negative-gap";
   const formattedGapPercent =
     gap_percent >= 0 ? gap_percent.toFixed(2) : -gap_percent.toFixed(2);
 
   const handleRowClick = () => {
-    onClick({ img_link, ticker, name, price_upbit });
+    onClick({ img_link, ticker, name });
   };
 
   return (
@@ -34,10 +36,10 @@ const TableRow = ({
           <div className="ticker">{ticker}</div>
           <div className="name">{name}</div>
         </div>
-        <div className={`cell ${gapClass}`}>{price_upbit}</div>
-        <div className={`cell ${gapClass}`}>{price_binance}</div>
+        <div className={`cell ${gapClass}`}>{toFormattedString(price_bithumb)}</div>
+        <div className={`cell ${gapClass}`}>{toFormattedString(price_binance)}</div>
         <div className={`cell ${gapClass}`}>
-          {price_gap} <FontAwesomeIcon icon={icon} />
+          {toFormattedString(price_gap)} <FontAwesomeIcon icon={icon} />
         </div>
         <div className={`cell ${gapClass}`}>{formattedGapPercent}%</div>
       </div>

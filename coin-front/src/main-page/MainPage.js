@@ -19,12 +19,13 @@ function MainPage() {
     percent: null,
   });
   const [autoRefreshEnabled, setAutoRefreshEnabled] = useState(false);
-  const [rating, setRating] = useState(0);
+  const [exchange, setExchange] = useState(0);
+  const [refreshTime, setRefreshTime] = useState(1);
 
   const getList = async () => {
     try {
-      const ratingData = await getExchangeRate();
-      setRating(ratingData[0].exchangeRate);
+      const exchangeData = await getExchangeRate();
+      setExchange(exchangeData);
     } catch {
       console.log("환율 데이터를 가져올 수 없습니다.");
     }
@@ -43,25 +44,25 @@ function MainPage() {
   }, []);
 
   useEffect(() => {
-    try{
+    try {
       const filteredList = list.filter((item) => {
         const tickerMatch = item.ticker
           .toLowerCase()
           .includes(search.toLowerCase());
-        const nameMatch = item.name.toLowerCase().includes(search.toLowerCase());
+        const nameMatch = item.name
+          .toLowerCase()
+          .includes(search.toLowerCase());
         return tickerMatch || nameMatch;
       });
-  
+
       setFilteredList(filteredList);
-    }catch{
-      console.log("서버 오류났다구")
+    } catch {
+      console.log("서버 오류났다구");
     }
-    
   }, [search, list]);
 
   useEffect(() => {
-    
-    const nonNullKey = Object.keys(order).find(key => order[key] !== null);
+    const nonNullKey = Object.keys(order).find((key) => order[key] !== null);
     const orderType = nonNullKey || null;
 
     if (orderType !== null) {
@@ -69,20 +70,20 @@ function MainPage() {
         switch (orderType) {
           case "upbit":
             return order[orderType] === "asc"
-              ? a["price_upbit"].localeCompare(b["price_upbit"])
-              : b["price_upbit"].localeCompare(a["price_upbit"]);
+              ? a["price_bithumb"] - b["price_bithumb"]
+              : b["price_bithumb"] - a["price_bithumb"];
           case "binance":
             return order[orderType] === "asc"
-              ? a["price_binance"].localeCompare(b["price_binance"])
-              : b["price_binance"].localeCompare(a["price_binance"]);
+              ? a["price_binance"] - b["price_binance"]
+              : b["price_binance"] - a["price_binance"];
           case "gap":
             return order[orderType] === "asc"
               ? a["price_gap"] - b["price_gap"]
               : b["price_gap"] - a["price_gap"];
           case "percent":
             return order[orderType] === "asc"
-              ? a["formattedGapPercent"] - b["formattedGapPercent"]
-              : b["formattedGapPercent"] - a["formattedGapPercent"];
+              ? a["gap_percent"] - b["gap_percent"]
+              : b["gap_percent"] - a["gap_percent"];
           default:
             return 0;
         }
@@ -97,13 +98,13 @@ function MainPage() {
       intervalId = setInterval(() => {
         getList();
         console.log("새로고침");
-      }, 10000);
+      }, 1000 * refreshTime);
     } else {
       clearInterval(intervalId);
     }
 
     return () => clearInterval(intervalId);
-  }, [autoRefreshEnabled]);
+  }, [autoRefreshEnabled, refreshTime]);
 
   return (
     <>
@@ -112,7 +113,9 @@ function MainPage() {
         <Option
           autoRefreshEnabled={autoRefreshEnabled}
           setAutoRefreshEnabled={setAutoRefreshEnabled}
-          rating={rating}
+          exchange={exchange}
+          refreshTime={refreshTime}
+          setRefreshTime={setRefreshTime}
         />
         <TableOfContents order={order} setOrder={setOrder} />
         {loading && <Loading />}

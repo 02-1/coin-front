@@ -22,12 +22,12 @@ function Top({ rowData }) {
         headers: { accept: "application/json" },
       };
       const response = await fetch(
-        `https://api.bithumb.com/public/ticker`,
+        `https://api.bithumb.com/public/ticker/${rowData.ticker}_KRW`,
         options
       );
       const data = await response.json();
       if (data && data.data.closing_price !== undefined) {
-        setPrice(data.data.closing_price);
+        setPrice(parseFloat(data.data.closing_price));
       } else {
         console.error("Closing price not found in response data.");
       }

@@ -5,6 +5,17 @@ import TableRow from "./TableRow";
 function TableList({ list }) {
   const navigate = useNavigate();
 
+  const calculateAverageGapPercent = () => {
+    if (list.length === 0) return 0;
+    const totalGapPercent = list.reduce(
+      (sum, item) => sum + item.gap_percent,
+      0
+    );
+    return totalGapPercent / list.length;
+  };
+
+  const averageGapPercent = calculateAverageGapPercent();
+
   const handleRowClick = (rowData) => {
     navigate("/prices", { state: { rowData } });
   };
@@ -12,7 +23,12 @@ function TableList({ list }) {
   return (
     <div>
       {list.map((item) => (
-        <TableRow key={item.id} {...item} onClick={handleRowClick} />
+        <TableRow
+          key={item.id}
+          {...item}
+          onClick={handleRowClick}
+          averageGapPercent={averageGapPercent}
+        />
       ))}
     </div>
   );

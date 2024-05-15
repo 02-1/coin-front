@@ -58,7 +58,7 @@ const CoinChart = ({name, ticker}) => {
           </button>
         </div>
         <select value={selectedItem} onChange={handleChange}>
-          {["분봉", "일봉", "월봉"].map((item, index) => (
+          {["분봉", "시봉", "일봉"].map((item, index) => (
             <option key={index} value={item}>
               {item}
             </option>

@@ -15,7 +15,7 @@
 }
 
 .negative-gap {
-  color: #467cf1;
+  color: orange;
 }
 
 .cells > .cell {
@@ -28,7 +28,7 @@
   word-wrap: break-word;
 }
 
-.icon-container{
+.icon-container {
   height: 60px;
   overflow: hidden;
   justify-content: center;
@@ -51,7 +51,6 @@
 .ticker {
   margin: 0 8px;
   font-weight: 600;
-
 }
 
 .name {
@@ -59,4 +58,3 @@
   font-weight: 500;
   font-size: 14px;
 }
-
