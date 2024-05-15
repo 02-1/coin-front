@@ -100,14 +100,16 @@ async function getPriceBinance(ticker) {
 }
 
 export async function getExchangeRate() {
-  try{
-    const response = await fetch(
-      `http://${process.env.REACT_APP_IP}/exchange-rate`
-    );
-    const body = await response.json();
-    return body[0].exchangeRate;
-  }catch{
-    console.log("환율 내놔");
-    return 1370
-  }
+  //서버없을땐 이렇게 ..ㅎ
+  // try{
+  //   const response = await fetch(
+  //     `http://${process.env.REACT_APP_IP}/exchange-rate`
+  //   );
+  //   const body = await response.json();
+  //   return body[0].exchangeRate;
+  // }catch{
+  //   console.log("환율 내놔");
+  //   return 1370
+  // }
+  return 1070;
 }
