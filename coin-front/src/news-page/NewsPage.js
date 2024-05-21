@@ -20,7 +20,7 @@ function NewsPage(keyword) {
     try {
       setLoading(true);
       const res = await axios.get(
-        `/feed/v2/search/articles?keyword=${rowData.ticker}&offset=${offset}&limit=${limit}&isHot=false`
+        `http://${process.env.REACT_APP_IP}/coin-news?symbol=${rowData.ticker}&offset=${offset}&limit=${limit}`
       );
       const extractedData = res.data.records.map((record) => ({
         thumbnailImage: record.thumbnailImage,
