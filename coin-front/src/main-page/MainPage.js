@@ -20,7 +20,7 @@ function MainPage() {
   });
   const [autoRefreshEnabled, setAutoRefreshEnabled] = useState(false);
   const [exchange, setExchange] = useState(0);
-  const [refreshTime, setRefreshTime] = useState(1);
+  const [refreshTime, setRefreshTime] = useState(10);
 
   const getList = async () => {
     try {

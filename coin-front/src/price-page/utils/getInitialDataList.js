@@ -53,7 +53,7 @@ const getInitialDataList = async ({
           `http://${process.env.REACT_APP_IP}/exchange-rate`
         );
         const body = await response.json();
-        rating = body[0].exchangeRate;
+        rating = body.exchangeRate;
       } catch {
         console.log("환율 데이터를 가져올 수 없습니다.");
       }

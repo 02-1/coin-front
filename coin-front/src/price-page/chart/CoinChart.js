@@ -6,7 +6,7 @@ import getInitialDataList from "../utils/getInitialDataList";
 import getColors from "../utils/getColors";
 
 const CoinChart = ({name, ticker}) => {
-  const [selectedItem, setSelectedItem] = useState("분봉");
+  const [selectedItem, setSelectedItem] = useState("일봉");
   const [selectedLocation, setSelectedLocation] = useState("국내");
 
   const handleChange = (event) => {
