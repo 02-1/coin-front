@@ -1,17 +1,20 @@
+
 function RefreshButton({
   refreshTime,
   setRefreshTime,
   autoRefreshEnabled,
   setAutoRefreshEnabled,
 }) {
+
   const handleAutoRefreshToggle = () => {
     setAutoRefreshEnabled(!autoRefreshEnabled);
-    setRefreshTime(1);
+    setRefreshTime(10);
   };
 
   const onchange = (e) => {
     setRefreshTime(e.target.value);
   };
+
   return (
     <>
       <label>
