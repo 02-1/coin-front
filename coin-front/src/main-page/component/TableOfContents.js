@@ -12,9 +12,9 @@ const TableOfContents = ({ order, setOrder }) => {
     };
 
     if (order[orderBy] === null) {
-      newOrder[orderBy] = "asc";
-    } else if (order[orderBy] === "asc") {
       newOrder[orderBy] = "dsc";
+    } else if (order[orderBy] === "dsc") {
+      newOrder[orderBy] = "asc";
     } else {
       newOrder[orderBy] = null;
     }
@@ -29,7 +29,7 @@ const TableOfContents = ({ order, setOrder }) => {
     ) {
       return (
         <span className="arrow">
-          {order[orderBy] === "asc" ? (
+          {order[orderBy] === "dsc" ? (
             <FontAwesomeIcon icon={faCaretUp} />
           ) : (
             <FontAwesomeIcon icon={faCaretDown} />

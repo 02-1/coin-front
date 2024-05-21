@@ -12,6 +12,7 @@ function MainPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filteredList, setFilteredList] = useState([]);
+  const [sortedList, setSortedList] = useState(filteredList);
   const [order, setOrder] = useState({
     upbit: null,
     binance: null,
@@ -20,7 +21,7 @@ function MainPage() {
   });
   const [autoRefreshEnabled, setAutoRefreshEnabled] = useState(false);
   const [exchange, setExchange] = useState(0);
-  const [refreshTime, setRefreshTime] = useState(10);
+  const [refreshTime, setRefreshTime] = useState(1);
 
   const getList = async () => {
     try {
@@ -44,7 +45,7 @@ function MainPage() {
   }, []);
 
   useEffect(() => {
-    try {
+   
       const filteredList = list.filter((item) => {
         const tickerMatch = item.ticker
           .toLowerCase()
@@ -54,11 +55,7 @@ function MainPage() {
           .includes(search.toLowerCase());
         return tickerMatch || nameMatch;
       });
-
       setFilteredList(filteredList);
-    } catch {
-      console.log("서버 오류났다구");
-    }
   }, [search, list]);
 
   useEffect(() => {
@@ -66,7 +63,7 @@ function MainPage() {
     const orderType = nonNullKey || null;
 
     if (orderType !== null) {
-      filteredList.sort((a, b) => {
+      const sortedList = [...filteredList].sort((a, b) => {
         switch (orderType) {
           case "upbit":
             return order[orderType] === "asc"
@@ -88,7 +85,15 @@ function MainPage() {
             return 0;
         }
       });
+      setSortedList(sortedList);
     }
+    else{
+      const sortedList = [...filteredList].sort((a,b) => {
+        return a["id"]-b["id"]
+      })
+      setSortedList(sortedList);
+    }
+
   }, [order, filteredList]);
 
   useEffect(() => {
@@ -119,7 +124,7 @@ function MainPage() {
         />
         <TableOfContents order={order} setOrder={setOrder} />
         {loading && <Loading />}
-        {!loading && <TableList list={filteredList} />}
+        {!loading && <TableList list={sortedList} />}
       </div>
     </>
   );

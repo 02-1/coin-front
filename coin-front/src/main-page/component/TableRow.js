@@ -14,10 +14,15 @@ const TableRow = ({
   price_gap,
   gap_percent,
   onClick,
-  averageGapPercent
+  averageGapPercent,
 }) => {
   const icon = gap_percent >= 0 ? faCaretUp : faCaretDown;
-  const gapClass = gap_percent >= averageGapPercent ? "positive-gap" : "negative-gap";
+  const gapClass =
+    gap_percent <= 0
+      ? "negative-gap"
+      : gap_percent >= averageGapPercent
+      ? "positive-gap"
+      : "little-gap";
   const formattedGapPercent =
     gap_percent >= 0 ? gap_percent.toFixed(2) : -gap_percent.toFixed(2);
 
@@ -36,8 +41,12 @@ const TableRow = ({
           <div className="ticker">{ticker}</div>
           <div className="name">{name}</div>
         </div>
-        <div className={`cell ${gapClass}`}>{toFormattedString(price_bithumb)}</div>
-        <div className={`cell ${gapClass}`}>{toFormattedString(price_binance)}</div>
+        <div className={`cell ${gapClass}`}>
+          {toFormattedString(price_bithumb)}
+        </div>
+        <div className={`cell ${gapClass}`}>
+          {toFormattedString(price_binance)}
+        </div>
         <div className={`cell ${gapClass}`}>
           {toFormattedString(price_gap)} <FontAwesomeIcon icon={icon} />
         </div>

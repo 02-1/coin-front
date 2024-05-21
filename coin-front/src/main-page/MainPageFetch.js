@@ -44,7 +44,7 @@ export async function getCoinList() {
     dataList.map(async (e) => {
       const price_bithumb = await getPriceBithumb(e["ticker"]);
       const price_binance = (await getPriceBinance(e["ticker"])) * exchange;
-      const price_gap = Math.abs(price_bithumb - price_binance);
+      const price_gap = price_bithumb - price_binance;
       const gap_percent = (price_gap / price_bithumb) * 100;
       return {
         ...e,

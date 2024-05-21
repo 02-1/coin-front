@@ -22,10 +22,11 @@ function TableList({ list }) {
 
   return (
     <div>
-      {list.map((item) => (
+      {list.map((item, index) => (
         <TableRow
           key={item.id}
           {...item}
+          id={index + 1}
           onClick={handleRowClick}
           averageGapPercent={averageGapPercent}
         />

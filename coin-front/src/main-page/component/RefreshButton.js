@@ -6,7 +6,7 @@ function RefreshButton({
 }) {
   const handleAutoRefreshToggle = () => {
     setAutoRefreshEnabled(!autoRefreshEnabled);
-    setRefreshTime(10);
+    setRefreshTime(1);
   };
 
   const onchange = (e) => {

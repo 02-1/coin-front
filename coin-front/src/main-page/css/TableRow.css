@@ -14,8 +14,12 @@
   color: #ff5c5c;
 }
 
-.negative-gap {
+.little-gap {
   color: orange;
+}
+
+.negative-gap{
+  color: #3388ee;
 }
 
 .cells > .cell {
