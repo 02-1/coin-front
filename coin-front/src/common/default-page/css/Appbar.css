@@ -19,6 +19,7 @@
     transform: translateX(-5px); /* 호버 시 요소를 위로 5px 이동 */
 }
 .appbar{
+    width: 80%;
     left: 15%;
     display: flex;
     align-items: center;
@@ -33,4 +34,13 @@
 }
 hr{
     border: rgba(223, 223, 223, 0.531) 0.5px solid;
+}
+.button{
+    position: absolute;
+    right: 15%;
+}
+.current-price{
+    
+    margin-left: 16px;
+    
 }
