@@ -1,0 +1,8 @@
+.detail-container{
+    margin: 32px auto;
+    width: 600px;
+    white-space: pre-wrap;
+    border: 1px solid gray;
+    padding: 32px;
+    border-radius: 16px;
+}
