@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CustomTab from "../../component/CustomTab";
 import { useState, useEffect } from "react";
 import { toFormattedString } from "../../../Format";
+import { prominent } from "color.js";
 
 function Appbar({ rowData }) {
   const navigate = useNavigate();
@@ -11,6 +12,22 @@ function Appbar({ rowData }) {
     navigate(path, { state: { rowData } });
   };
   const [price, setPrice] = useState(0);
+  const [rgbColor, setRgbColor] = useState("");
+
+  useEffect(() => {
+    async function fetchColor() {
+      try {
+        const color = await prominent(rowData.img_link, {
+          amount: 1,
+        });
+        setRgbColor(() => `rgb(${color[0]}, ${color[1]}, ${color[2]})`);
+      } catch (err) {
+        console.error("Error fetching color: ", err);
+      }
+    }
+
+    fetchColor();
+  }, []);
 
   useEffect(() => {
     async function getPrice() {
@@ -37,7 +54,7 @@ function Appbar({ rowData }) {
 
     getPrice();
   }, [rowData.ticker]);
-
+  console.log(rgbColor);
   return (
     <>
       <div className="container">
@@ -56,10 +73,26 @@ function Appbar({ rowData }) {
           </div>
           <div className="current-price">{toFormattedString(price)}원</div>
           <div className="button">
-            <CustomTab text="시세" onClick={() => handleClick("/prices")} />
-            <CustomTab text="뉴스" onClick={() => handleClick("/news")} />
-            <CustomTab text="정보" onClick={() => handleClick("/details")} />
-            <CustomTab text="이때.." onClick={() => handleClick("/prices")} />
+            <CustomTab
+              text="시세"
+              onClick={() => handleClick("/prices")}
+              rgbColor={rgbColor}
+            />
+            <CustomTab
+              text="뉴스"
+              onClick={() => handleClick("/news")}
+              rgbColor={rgbColor}
+            />
+            <CustomTab
+              text="정보"
+              onClick={() => handleClick("/details")}
+              rgbColor={rgbColor}
+            />
+            <CustomTab
+              text="이때.."
+              onClick={() => handleClick("/prices")}
+              rgbColor={rgbColor}
+            />
           </div>
         </div>
       </div>

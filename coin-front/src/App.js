@@ -1,6 +1,5 @@
 //import WebSocketClient from "./WebSocket";
 import MainPage from "./main-page/MainPage";
-
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import PricePage from "./price-page/PricePage";
