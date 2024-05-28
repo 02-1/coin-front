@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Chart</title>
+<script>
+var dayOrNight = null;
+var userInfo = "";
+var locale = "ko";
+var loginMessage = "";
+var url = "https://pro.scolkg.com";
+var tickerUrl = "https://ticker1.cryprice.com";
+var cdnPath = "https://cdn1.cryprice.com";
+</script>
+</head>
+<body>
+   <div class="container squareShadow">      
+    <div id="kimchipremium" style="height:610px"></div>
+   </div>
+
+<script src="https://cdn1.cryprice.com/javascripts/jquery.min.js"></script>
+<script src="https://cdn1.cryprice.com/my_js/common.js?v=1.47"></script>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+<script>
+
+$(document).ready(function(){
+   
+   var tradingViewTheme = "Light";
+
+   if(getCookie("changeMode") == ".밤") {
+      tradingViewTheme = "Dark";
+   }
+
+   var viewLocale = "en";
+   if(locale == "ko") {
+      viewLocale = "kr";
+   }
+   var tvKimchi = new TradingView.widget(
+         {
+            "autosize": true,
+            "width": 1080,
+            "symbol": "((BINANCE:BTCUSD/BINANCE:BTCUSD)*BITHUMB:BTCKRW-BINANCE:BTCUSDT*FX_IDC:USDKRW)/(BINANCE:BTCUSD*FX_IDC:USDKRW)*100" ,
+            "interval": "1D",
+            "timezone": "Asia/Seoul",
+            "theme": tradingViewTheme,
+            "style": "1",
+            "locale": viewLocale,
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "allow_symbol_change": true,
+            "hide_top_toolbar": false,
+            "container_id": "kimchipremium"
+         }
+   );
+   
+
+   $("#symbol, #exchanges").change(function() {
+      var symbol = $("#symbol option:selected").val();
+      var exchange = $("#exchanges option:selected").val();
+      var tvSymbol = "(("+exchange+":BTCUSD/"+exchange+":BTCUSD)*BITHUMB:"+symbol+"KRW-"+exchange+":"+symbol+"USDT*FX_IDC:USDKRW)/("+exchange+":"+symbol+"USD*FX_IDC:USDKRW)*100";
+      tvKimchi.options.symbol = tvSymbol;
+      tvKimchi.reload();
+   })
+   
+   var tvCoinbasePremium = new TradingView.widget(
+         {
+            "autosize": true,
+            "width": 1080,
+            "symbol": "((COINBASE:BTCUSD-BINANCE:BTCUSDT)/BINANCE:BTCUSDT)*100" ,
+            "interval": "1D",
+            "timezone": "Asia/Seoul",
+            "theme": tradingViewTheme,
+            "style": "1",
+            "locale": viewLocale,
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "allow_symbol_change": true,
+            "hide_top_toolbar": false,
+            "container_id": "coinbasepremium"
+         }
+   );
+   
+
+   $("#symbol2, #exchanges2").change(function() {
+      var symbol = $("#symbol2 option:selected").val();
+      var exchange = $("#exchanges2 option:selected").val();
+      var tvSymbol = "(("+exchange+":"+symbol+"USD-BINANCE:"+symbol+"USDT)/BINANCE:"+symbol+"USDT)*100";
+      tvCoinbasePremium.options.symbol = tvSymbol;
+      tvCoinbasePremium.reload();
+   })
+
+
+});
+
+
+</script>
+</body>
+</html>

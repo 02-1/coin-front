@@ -11,15 +11,20 @@
 }
 
 .positive-gap {
-  color: #ff5c5c;
+  color: #f45815;
 }
+
+.large-gap {
+  color: red;
+}
+
 
 .little-gap {
   color: orange;
 }
 
 .negative-gap{
-  color: #3388ee;
+  color: #666666;
 }
 
 .cells > .cell {

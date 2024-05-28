@@ -22,6 +22,8 @@ const TableRow = ({
       ? "negative-gap"
       : gap_percent >= averageGapPercent
       ? "positive-gap"
+      : gap_percent >= 4
+      ? "large-gap"
       : "little-gap";
   const formattedGapPercent =
     gap_percent >= 0 ? gap_percent.toFixed(2) : -gap_percent.toFixed(2);

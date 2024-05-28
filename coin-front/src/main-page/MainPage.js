@@ -45,14 +45,13 @@ function MainPage() {
   }, []);
 
   useEffect(() => {
-   
       const filteredList = list.filter((item) => {
         const tickerMatch = item.ticker
           .toLowerCase()
-          .includes(search.toLowerCase());
+          .includes(search.toLowerCase().trim());
         const nameMatch = item.name
           .toLowerCase()
-          .includes(search.toLowerCase());
+          .includes(search.toLowerCase().trim());
         return tickerMatch || nameMatch;
       });
       setFilteredList(filteredList);

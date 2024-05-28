@@ -5,6 +5,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import PricePage from "./price-page/PricePage";
 import DetailPage from "./detail-page/DetailPage";
 import NewsPage from "./news-page/NewsPage";
+import TestPage from "./a/test";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/news" element={<NewsPage />} />
       </Routes>
     </BrowserRouter>
+   // <TestPage/>
   );
 }
 

@@ -6,7 +6,7 @@ import getInitialDataList from "../utils/getInitialDataList";
 import getColors from "../utils/getColors";
 
 const CoinChart = ({name, ticker}) => {
-  const [selectedItem, setSelectedItem] = useState("일봉");
+  const [selectedItem, setSelectedItem] = useState("day");
   const [selectedLocation, setSelectedLocation] = useState("국내");
 
   const handleChange = (event) => {
@@ -58,7 +58,7 @@ const CoinChart = ({name, ticker}) => {
           </button>
         </div>
         <select value={selectedItem} onChange={handleChange}>
-          {["분봉", "시봉", "일봉"].map((item, index) => (
+          {["minute", "hour", "day"].map((item, index) => (
             <option key={index} value={item}>
               {item}
             </option>

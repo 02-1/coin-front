@@ -1,15 +1,15 @@
 import axios from "axios";
 
 const items = {
-  분봉: "1m",
-  시봉: "1h",
-  일봉: "24h",
+  minute: "1m",
+  hour: "1h",
+  day: "24h",
 };
 
 const interval = {
-  분봉: "1m",
-  시봉: "1h",
-  일봉: "1d",
+  minute: "1m",
+  hour: "1h",
+  day: "1d",
 };
 
 const getInitialDataList = async ({
