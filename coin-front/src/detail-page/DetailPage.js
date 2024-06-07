@@ -5,7 +5,14 @@ import { useEffect, useState } from "react";
 import "./css/DetailPage.css";
 function DetailPage() {
   const location = useLocation();
-  const { rowData } = location.state;
+
+  const queryParams = new URLSearchParams(location.search);
+  const img_link = queryParams.get("img_link");
+  const ticker = queryParams.get("ticker");
+  const name = queryParams.get("name");
+
+  const rowData = { img_link, ticker, name: decodeURIComponent(name) };
+  
   const [detail, setDetail] = useState("");
   const [loading, setLoading] = useState(false);
 

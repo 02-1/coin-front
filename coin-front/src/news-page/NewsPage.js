@@ -7,7 +7,13 @@ import Loading from "../common/component/Loading";
 
 function NewsPage(keyword) {
   const location = useLocation();
-  const { rowData } = location.state;
+  const queryParams = new URLSearchParams(location.search);
+  const img_link = queryParams.get("img_link");
+  const ticker = queryParams.get("ticker");
+  const name = queryParams.get("name");
+
+  const rowData = { img_link, ticker, name: decodeURIComponent(name) };
+
   const [newsList, setNewsList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [offset, setOffset] = useState(0);

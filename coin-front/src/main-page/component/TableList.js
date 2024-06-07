@@ -1,9 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import TableRow from "./TableRow";
 
 function TableList({ list }) {
-  const navigate = useNavigate();
 
   const calculateAverageGapPercent = () => {
     if (list.length === 0) return 0;
@@ -17,7 +15,10 @@ function TableList({ list }) {
   const averageGapPercent = calculateAverageGapPercent();
 
   const handleRowClick = (rowData) => {
-    navigate("/prices", { state: { rowData } });
+    const url = "/prices";
+    
+    const params = new URLSearchParams(rowData).toString();
+    window.open(`${url}?${params}`, `_blank`);
   };
 
   return (

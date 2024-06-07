@@ -6,22 +6,30 @@ import "./css/MainPage.css";
 import Loading from "../common/component/Loading";
 import { getCoinList, getExchangeRate } from "./MainPageFetch";
 import Option from "./component/Option";
+import Cookies from "js-cookie";
+import TestPage from "../a/test";
+import { ImCog } from "react-icons/im";
+import { MdOutlineCancel } from "react-icons/md";
 
 function MainPage() {
+  const [isRefreshPopupOpen, setIsRefreshPopupOpen] = useState(false);
+  const [isChartPopupOpen, setIsChartPopupOpen] = useState(false);
+  const [refreshInterval, setRefreshInterval] = useState(
+    parseInt(Cookies.get("refreshInterval"), 10) || ""
+  );
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filteredList, setFilteredList] = useState([]);
-  const [sortedList, setSortedList] = useState(filteredList);
+  const [sortedList, setSortedList] = useState([]);
   const [order, setOrder] = useState({
     upbit: null,
     binance: null,
     gap: null,
     percent: null,
   });
-  const [autoRefreshEnabled, setAutoRefreshEnabled] = useState(false);
   const [exchange, setExchange] = useState(0);
-  const [refreshTime, setRefreshTime] = useState(10);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const getList = async () => {
     try {
@@ -45,16 +53,16 @@ function MainPage() {
   }, []);
 
   useEffect(() => {
-      const filteredList = list.filter((item) => {
-        const tickerMatch = item.ticker
-          .toLowerCase()
-          .includes(search.toLowerCase().trim());
-        const nameMatch = item.name
-          .toLowerCase()
-          .includes(search.toLowerCase().trim());
-        return tickerMatch || nameMatch;
-      });
-      setFilteredList(filteredList);
+    const filteredList = list.filter((item) => {
+      const tickerMatch = item.ticker
+        .toLowerCase()
+        .includes(search.toLowerCase().trim());
+      const nameMatch = item.name
+        .toLowerCase()
+        .includes(search.toLowerCase().trim());
+      return tickerMatch || nameMatch;
+    });
+    setFilteredList(filteredList);
   }, [search, list]);
 
   useEffect(() => {
@@ -85,48 +93,95 @@ function MainPage() {
         }
       });
       setSortedList(sortedList);
-    }
-    else{
-      const sortedList = [...filteredList].sort((a,b) => {
-        return a["id"]-b["id"]
-      })
+    } else {
+      const sortedList = [...filteredList].sort((a, b) => {
+        return a["id"] - b["id"];
+      });
       setSortedList(sortedList);
     }
-
   }, [order, filteredList]);
 
   useEffect(() => {
-    let intervalId;
-    if(refreshTime < 10){
-      setRefreshTime(10);
-    }
-    if (autoRefreshEnabled) {
-      intervalId = setInterval(() => {
-        getList();
-        console.log("새로고침");
-      }, 1000 * refreshTime);
-    } else {
-      clearInterval(intervalId);
-    }
+    if (!isChartPopupOpen && (refreshInterval === 0 || refreshInterval >= 10)) {
+      const interval = setInterval(() => {
+        window.location.reload();
+      }, refreshInterval * 1000);
 
-    return () => clearInterval(intervalId);
-  }, [autoRefreshEnabled, refreshTime]);
+      return () => clearInterval(interval);
+    }
+  }, [refreshInterval, isChartPopupOpen]);
+
+  const handleRefreshButtonClick = () => {
+    setIsRefreshPopupOpen(true);
+  };
+
+  const handleChartButtonClick = () => {
+    setIsChartPopupOpen(true);
+  };
+
+  const handleSave = () => {
+    const interval = parseInt(refreshInterval, 10);
+    if (interval === 0 || interval >= 10) {
+      Cookies.set("refreshInterval", interval, { expires: 7 });
+      setIsRefreshPopupOpen(false);
+      setErrorMessage("");
+    } else {
+      setErrorMessage("Refresh interval must be 0 or 10 seconds or more.");
+    }
+  };
 
   return (
     <>
+      <div className="setting-container">
+        <button className="setting" onClick={handleChartButtonClick}>
+          김프 차트
+        </button>
+        <button className="setting" onClick={handleRefreshButtonClick}>
+          <ImCog />
+        </button>
+      </div>
       <SearchBar search={search} setSearch={setSearch} />
       <div className="table-container">
-        <Option
-          autoRefreshEnabled={autoRefreshEnabled}
-          setAutoRefreshEnabled={setAutoRefreshEnabled}
-          exchange={exchange}
-          refreshTime={refreshTime}
-          setRefreshTime={setRefreshTime}
-        />
+        <Option exchange={exchange} />
         <TableOfContents order={order} setOrder={setOrder} />
         {loading && <Loading />}
         {!loading && <TableList list={sortedList} />}
       </div>
+      {isRefreshPopupOpen && (
+        <div className="popup">
+          <button
+            className="close-btn"
+            onClick={() => setIsRefreshPopupOpen(false)}
+          >
+            <MdOutlineCancel />
+          </button>
+          <div className="popup-content">
+            <input
+              type="number"
+              value={refreshInterval}
+              onChange={(e) => setRefreshInterval(e.target.value)}
+              placeholder="Enter seconds"
+            />
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+            <button onClick={handleSave}>Save</button>
+          </div>
+        </div>
+      )}
+      {isChartPopupOpen && (
+        <div className="popup">
+          <div className="popup-chart">
+            <button
+              className="close-btn-chart"
+              onClick={() => setIsChartPopupOpen(false)}
+            >
+              <MdOutlineCancel />
+            </button>
+            <div className="popup-content">
+              <TestPage />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

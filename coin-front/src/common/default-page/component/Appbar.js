@@ -5,12 +5,10 @@ import CustomTab from "../../component/CustomTab";
 import { useState, useEffect } from "react";
 import { toFormattedString } from "../../../Format";
 import { prominent } from "color.js";
+import { Helmet } from 'react-helmet';
 
 function Appbar({ rowData }) {
   const navigate = useNavigate();
-  const handleClick = (path) => {
-    navigate(path, { state: { rowData } });
-  };
   const [price, setPrice] = useState(0);
   const [rgbColor, setRgbColor] = useState("");
 
@@ -27,7 +25,7 @@ function Appbar({ rowData }) {
     }
 
     fetchColor();
-  }, []);
+  }, [rowData.img_link]);
 
   useEffect(() => {
     async function getPrice() {
@@ -54,13 +52,24 @@ function Appbar({ rowData }) {
 
     getPrice();
   }, [rowData.ticker]);
-  console.log(rgbColor);
+
+  const handleTabClick = (path) => {
+    navigate({
+      pathname: path,
+      search: `?img_link=${rowData.img_link}&ticker=${rowData.ticker}&name=${encodeURIComponent(rowData.name)}`
+    });
+  };
+
   return (
     <>
+     <Helmet>
+        <title>{rowData.name}</title>
+        <link rel="icon" type="image/png" href={rowData.img_link} />
+      </Helmet>
       <div className="container">
         <IoIosArrowBack
           className="home_icon"
-          onClick={() => handleClick("/")}
+          onClick={() => navigate("/")}
         />
         <div className="appbar">
           <img
@@ -75,22 +84,22 @@ function Appbar({ rowData }) {
           <div className="button">
             <CustomTab
               text="시세"
-              onClick={() => handleClick("/prices")}
+              onClick={() => handleTabClick("/prices")}
               rgbColor={rgbColor}
             />
             <CustomTab
               text="뉴스"
-              onClick={() => handleClick("/news")}
+              onClick={() => handleTabClick("/news")}
               rgbColor={rgbColor}
             />
             <CustomTab
               text="정보"
-              onClick={() => handleClick("/details")}
+              onClick={() => handleTabClick("/details")}
               rgbColor={rgbColor}
             />
             <CustomTab
               text="이때.."
-              onClick={() => handleClick("/prices")}
+              onClick={() => handleTabClick("/prices")}
               rgbColor={rgbColor}
             />
           </div>

@@ -5,6 +5,5 @@ import PastPricePage from "./past-price-page/PastPricePage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <App />
-  <PastPricePage />
+   <App />
 );
