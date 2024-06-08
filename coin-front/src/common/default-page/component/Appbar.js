@@ -5,7 +5,7 @@ import CustomTab from "../../component/CustomTab";
 import { useState, useEffect } from "react";
 import { toFormattedString } from "../../../Format";
 import { prominent } from "color.js";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 
 function Appbar({ rowData }) {
   const navigate = useNavigate();
@@ -56,21 +56,20 @@ function Appbar({ rowData }) {
   const handleTabClick = (path) => {
     navigate({
       pathname: path,
-      search: `?img_link=${rowData.img_link}&ticker=${rowData.ticker}&name=${encodeURIComponent(rowData.name)}`
+      search: `?img_link=${rowData.img_link}&ticker=${
+        rowData.ticker
+      }&name=${encodeURIComponent(rowData.name)}`,
     });
   };
 
   return (
     <>
-     <Helmet>
+      <Helmet>
         <title>{rowData.name}</title>
         <link rel="icon" type="image/png" href={rowData.img_link} />
       </Helmet>
       <div className="container">
-        <IoIosArrowBack
-          className="home_icon"
-          onClick={() => navigate("/")}
-        />
+        <IoIosArrowBack className="home_icon" onClick={() => navigate("/")} />
         <div className="appbar">
           <img
             src={rowData.img_link}
@@ -99,7 +98,7 @@ function Appbar({ rowData }) {
             />
             <CustomTab
               text="이때.."
-              onClick={() => handleTabClick("/prices")}
+              onClick={() => handleTabClick("/past-price")}
               rgbColor={rgbColor}
             />
           </div>

@@ -1,51 +1,89 @@
 .past-price-container {
-    width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
+  width: auto;
+  margin: 64px auto;
+  padding: 64px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  
-  .inputs {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .price-info {
-    margin: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  .price-info>*{
-    margin: 16px;
-  }
-  
-  .past-price-container input[type="number"] {
-    width: 100px;
-    padding: 5px;
-    margin-top: 10px;
-  }
-  
-  .past-price-container button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .past-price-container button:hover {
-    background-color: #0056b3;
-  }
-  
+  margin-bottom: 20px;
+}
+.column-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.price-info {
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.price-info > * {
+  margin: 16px;
+}
+
+.past-price-container input[type="number"] {
+  width: 100px;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.past-price-container button {
+  width: 25px;
+  height: 25px;
+  padding: 5px 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.past-price-container button:hover {
+  background-color: #0056b3;
+}
+
+.resultContainer input {
+  margin-left: 10px;
+  font-size: 30px;
+  width: 250px;
+}
+.resultContainer{
+  display: flex;
+}
+
+.price-info {
+  font-size: 24px;
+}
+
+.datePicker {
+  display: flex;
+  font-size: 30px;
+  padding: 32px 0px;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 4px;
+  background-color: beige;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  color: black;
+  text-align: center;
+  padding-right: 14px;
+}
+
+.datePicker:hover {
+  cursor: pointer;
+}
