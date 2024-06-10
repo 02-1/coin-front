@@ -14,16 +14,15 @@ const TableRow = ({
   price_gap,
   gap_percent,
   onClick,
-  averageGapPercent,
+  values,
 }) => {
+  
   const icon = gap_percent >= 0 ? faCaretUp : faCaretDown;
   const gapClass =
-    gap_percent <= 0
+    gap_percent <= values[0]
       ? "negative-gap"
-      : gap_percent >= averageGapPercent
+      : gap_percent >= values[1]
       ? "positive-gap"
-      : gap_percent >= 4
-      ? "large-gap"
       : "little-gap";
   const formattedGapPercent =
     gap_percent >= 0 ? gap_percent.toFixed(2) : -gap_percent.toFixed(2);

@@ -121,7 +121,7 @@ label {
 .close-btn {
   color: black;
   margin-bottom: -3px;
-  margin-left: 210px;
+  margin-left: 420px;
   font-size: 25px;
   background-color: rgba(0, 0, 0, 0);
   border: none;
@@ -151,9 +151,24 @@ label {
   text-align: center;
 }
 
+.popup .save{
+  height: 30px;
+  width: 50px;
+  background-color: none;
+  border-radius: 25px;
+  border: 1px solid gray;
+}
+
 /* button {
   margin: 5px;
 } */
+
+.refresh {
+  padding-left: 10px;
+  border-radius: 25px;
+  height: 27px;
+  width: 300px;
+}
 
 .setting {
   margin: 3px;
@@ -187,3 +202,88 @@ label {
   overflow-y: scroll;
   height: 700px;
 }
+
+.SliderPage {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.value-boxes {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  margin-top: 20px;
+}
+
+.value-box {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.horizontal-slider {
+  width: 300px;
+  height: 25px;
+}
+
+.example-thumb {
+  height: 25px;
+  width: 25px;
+  background-color: #ddd;
+  border-radius: 50%;
+  cursor: grab;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.example-track {
+  top: 0;
+  bottom: 0;
+  background: #ddd;
+  border-radius: 999px;
+  z-index: 1; /* Add z-index to make track appear below thumb */
+}
+
+.example-track-0 {
+  background-color: #666666;
+}
+
+.example-track-1 {
+  background-color: orange;
+}
+
+.example-track-2 {
+  background-color: red;
+}
+
+.popup p{
+  font-size: 0.8rem;
+}
+.thumb-value {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+

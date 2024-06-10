@@ -10,12 +10,13 @@ import Cookies from "js-cookie";
 import TestPage from "../a/test";
 import { ImCog } from "react-icons/im";
 import { MdOutlineCancel } from "react-icons/md";
+import ReactSlider from "react-slider";
 
 function MainPage() {
   const [isRefreshPopupOpen, setIsRefreshPopupOpen] = useState(false);
   const [isChartPopupOpen, setIsChartPopupOpen] = useState(false);
   const [refreshInterval, setRefreshInterval] = useState(
-    parseInt(Cookies.get("refreshInterval"), 10) || ""
+    parseInt(Cookies.get("refreshInterval"), 10) || "0"
   );
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -123,13 +124,38 @@ function MainPage() {
     const interval = parseInt(refreshInterval, 10);
     if (interval === 0 || interval >= 10) {
       Cookies.set("refreshInterval", interval, { expires: 7 });
+      Cookies.set("autoMode", autoMode, { expires: 7 });
+      Cookies.set("values", values, { expires: 7 });
       setIsRefreshPopupOpen(false);
       setErrorMessage("");
     } else {
-      setErrorMessage("Refresh interval must be 0 or 10 seconds or more.");
+      setErrorMessage("새로고침 시간 설정 오류");
     }
   };
 
+  // useState 초기값 설정
+  const [values, setValues] = useState(() => {
+    // Cookie에서 값 불러오기
+    const cookieValues = Cookies.get("values");
+    if (cookieValues) {
+      return cookieValues.split(",").map(parseFloat);
+    } else {
+      return [0, 0]; // 기본값 설정
+    }
+  });
+
+  const [autoMode, setAutoMode] = useState(() => {
+    const cookieAutoMode = Cookies.get("autoMode");
+    if (cookieAutoMode == "false") {
+      return false;
+    } else {
+      return true;
+    }
+  });
+
+  const handleChange = (newValues) => {
+    setValues(newValues);
+  };
   return (
     <>
       <div className="setting-container">
@@ -145,7 +171,9 @@ function MainPage() {
         <Option exchange={exchange} />
         <TableOfContents order={order} setOrder={setOrder} />
         {loading && <Loading />}
-        {!loading && <TableList list={sortedList} />}
+        {!loading && (
+          <TableList list={sortedList} autoMode={autoMode} options={values} />
+        )}
       </div>
       {isRefreshPopupOpen && (
         <div className="popup">
@@ -156,14 +184,73 @@ function MainPage() {
             <MdOutlineCancel />
           </button>
           <div className="popup-content">
+            <h5>새로고침 설정</h5>
             <input
+              className="refresh"
               type="number"
               value={refreshInterval}
               onChange={(e) => setRefreshInterval(e.target.value)}
               placeholder="Enter seconds"
             />
-            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-            <button onClick={handleSave}>Save</button>
+            <div className="SliderPage">
+              <h5>
+                차트 색 범위 설정 (
+                <label>
+                  auto:
+                  <input
+                    type="checkbox"
+                    checked={autoMode}
+                    onChange={(e) => setAutoMode(e.target.checked)}
+                  />
+                </label>
+                )
+              </h5>
+
+              <div className="slider-container">
+                <ReactSlider
+                  className="horizontal-slider"
+                  thumbClassName="example-thumb"
+                  trackClassName="example-track"
+                  min={-2}
+                  max={5}
+                  step={0.01}
+                  value={values}
+                  onChange={handleChange}
+                  renderThumb={(props, state) => (
+                    <div {...props}>
+                      <div className="thumb-value">
+                        {state.valueNow.toFixed(2)}
+                      </div>
+                    </div>
+                  )}
+                  // renderTrack={({ index, ...props }, state) => {
+                  //   const trackColors = ["blue", "yellow", "orange"];
+                  //   return (
+                  //     <div
+                  //       {...props}
+                  //       className={`example-track example-track-${index}`}
+                  //       style={{ backgroundColor: trackColors[index] }}
+                  //     />
+                  //   );
+                  // }}
+                />
+
+                <div className="value-boxes">
+                  <div className="value-box">min</div>
+                  <div className="value-box">max</div>
+                </div>
+              </div>
+              <p>
+                -auto로 설정 시 음수는 회색, 주황색과 빨간색은 평균치로
+                계산됩니다.
+                <br />
+                -새로고침 시간은 0이나 10s이상으로 설정해야합니다.
+              </p>
+              {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+              <button className="save" onClick={handleSave}>
+                Save
+              </button>
+            </div>
           </div>
         </div>
       )}
