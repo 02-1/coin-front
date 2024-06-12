@@ -51,6 +51,8 @@ function MainPage() {
 
       const mostViewedData = await getCoinListMostView();
       setTop(mostViewedData); // 가장 많이 본 데이터를 배열로 설정
+      console.log("----------------");
+      console.log(mostViewedData);
     } catch {
       console.log("서버 연결 안되는뎁..");
       setLoading(false);
@@ -136,6 +138,7 @@ function MainPage() {
       Cookies.set("values", values, { expires: 7 });
       setIsRefreshPopupOpen(false);
       setErrorMessage("");
+      window.location.reload();
     } else {
       setErrorMessage("새로고침 시간 설정 오류");
     }
@@ -260,10 +263,9 @@ function MainPage() {
                 </div>
               </div>
               <p>
-                -auto로 설정 시 음수는 회색, 주황색과 빨간색은 평균치로
-                계산됩니다.
-                <br />
-                -새로고침 시간은 0이나 10s이상으로 설정해야합니다.
+                - auto로 설정 시 음수는 회색, 주황색은 평균 이하, 빨간색은 평균
+                이상으로 설정됩니다.
+                <br />- 새로고침 시간은 0이나 10s이상으로 설정해야합니다.
               </p>
               {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
               <button className="save" onClick={handleSave}>

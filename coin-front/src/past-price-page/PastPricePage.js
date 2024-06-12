@@ -24,8 +24,7 @@ export default function PastPricePage() {
 
   const handleDateChange = (date) => {
     setSelectedDate(() => date);
-    fetchData();
-    findDataForSelectedDate();
+    findDataForSelectedDate(date);
   };
 
   async function fetchData() {
@@ -37,7 +36,7 @@ export default function PastPricePage() {
       setExtractedData(data);
       const firstDate = new Date(data[0][0]);
       setFirstDate(firstDate);
-      findDataForSelectedDate();
+      findDataForSelectedDate(firstDate);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -47,11 +46,11 @@ export default function PastPricePage() {
     fetchData();
   }, []);
 
-  const findDataForSelectedDate = () => {
+  const findDataForSelectedDate = (date) => {
     const selectedTimestamp = new Date(
-      selectedDate.getFullYear(),
-      selectedDate.getMonth(),
-      selectedDate.getDate()
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
     ).getTime();
 
     console.log(`결과:${selectedTimestamp}`);
@@ -63,18 +62,18 @@ export default function PastPricePage() {
 
     if (dataForDate) {
       console.log(
-        `Data for ${selectedDate.getFullYear()}-${
-          selectedDate.getMonth() + 1
-        }-${selectedDate.getDate()}:`,
+        `Data for ${date.getFullYear()}-${
+          date.getMonth() + 1
+        }-${date.getDate()}:`,
         dataForDate[2],
         "원"
       );
       setPrice(dataForDate[2]);
     } else {
       console.log(
-        `No data found for ${selectedDate.getFullYear()}-${
-          selectedDate.getMonth() + 1
-        }-${selectedDate.getDate()}`
+        `No data found for ${date.getFullYear()}-${
+          date.getMonth() + 1
+        }-${date.getDate()}`
       );
     }
     getPrice();
@@ -111,11 +110,17 @@ export default function PastPricePage() {
   };
 
   const numberToKorean = (number) => {
+    if (number === 0) return "0";
+
     const units = ["", "만", "억", "조", "경"];
     const splitUnit = 10000;
     const splitCount = units.length;
     const resultArray = [];
     let resultString = "";
+
+    // 음수 처리
+    const isNegative = number < 0;
+    number = Math.abs(number);
 
     for (let i = 0; i < splitCount; i++) {
       const unitResult =
@@ -126,7 +131,13 @@ export default function PastPricePage() {
     }
 
     resultArray.reverse();
-    resultString = resultArray.join(" ");
+    resultString = resultArray.join(" ").trim();
+
+    // 음수라면 '-' 추가
+    if (isNegative) {
+      resultString = "-" + resultString;
+    }
+
     return resultString;
   };
 
@@ -155,7 +166,7 @@ export default function PastPricePage() {
   const getColorStyle = (value) => {
     if (value > 0) return { color: "red" };
     if (value < 0) return { color: "blue" };
-    return {};
+    return { color: "black" };
   };
 
   return (
@@ -191,7 +202,8 @@ export default function PastPricePage() {
           {priceDifference !== null && (
             <>
               <div style={getColorStyle(priceDifference)}>
-                가격 차이: {numberWithCommas(priceDifference)} 원
+                가격 차이:{" "}
+                {numberWithCommas(parseFloat(priceDifference.toFixed(7)))} 원
               </div>
               <div style={getColorStyle(priceDifferencePercentage)}>
                 비율 차이: {priceDifferencePercentage}%
@@ -214,6 +226,8 @@ export default function PastPricePage() {
               <span className="column-text">
                 {result < 0
                   ? `${numberWithCommas(result)}원 잃었습니다.`
+                  : result == 0
+                  ? `${numberWithCommas(result)}원 벌었습니다.`
                   : `${numberWithCommas(result)}원 벌었습니다.`}
                 <div>({numberToKorean(result)} 원)</div>
               </span>
