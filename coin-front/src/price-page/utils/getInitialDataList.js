@@ -48,15 +48,15 @@ const getInitialDataList = async ({
       return arr;
     } else {
       let rating = 1366.91;
-      // try {
-      //   const response = await fetch(
-      //     `http://${process.env.REACT_APP_IP}/exchange-rate`
-      //   );
-      //   const body = await response.json();
-      //   rating = body.exchangeRate;
-      // } catch {
-      //   console.log("환율 데이터를 가져올 수 없습니다.");
-      // }
+      try {
+        const response = await fetch(
+          `http://${process.env.REACT_APP_IP}/exchange-rate`
+        );
+        const body = await response.json();
+        rating = body.exchangeRate;
+      } catch {
+        console.log("환율 데이터를 가져올 수 없습니다.");
+      }
       const res = await axios.get(
         `https://api.binance.com/api/v3/klines${
           selectedLocation === "국내" ? items[selectedItem] : ""

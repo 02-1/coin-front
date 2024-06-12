@@ -4,7 +4,11 @@ import TableList from "./component/TableList";
 import TableOfContents from "./component/TableOfContents";
 import "./css/MainPage.css";
 import Loading from "../common/component/Loading";
-import { getCoinList, getExchangeRate } from "./MainPageFetch";
+import {
+  getCoinList,
+  getExchangeRate,
+  getCoinListMostView,
+} from "./MainPageFetch";
 import Option from "./component/Option";
 import Cookies from "js-cookie";
 import TestPage from "../a/test";
@@ -31,6 +35,7 @@ function MainPage() {
   });
   const [exchange, setExchange] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+  const [top, setTop] = useState([]);
 
   const getList = async () => {
     try {
@@ -43,6 +48,9 @@ function MainPage() {
       const newList = await getCoinList();
       setList(newList);
       setLoading(false);
+
+      const mostViewedData = await getCoinListMostView();
+      setTop(mostViewedData); // 가장 많이 본 데이터를 배열로 설정
     } catch {
       console.log("서버 연결 안되는뎁..");
       setLoading(false);
@@ -105,7 +113,7 @@ function MainPage() {
   useEffect(() => {
     if (!isChartPopupOpen && (refreshInterval === 0 || refreshInterval >= 10)) {
       const interval = setInterval(() => {
-        window.location.reload();
+        getList();
       }, refreshInterval * 1000);
 
       return () => clearInterval(interval);
@@ -133,20 +141,18 @@ function MainPage() {
     }
   };
 
-  // useState 초기값 설정
   const [values, setValues] = useState(() => {
-    // Cookie에서 값 불러오기
     const cookieValues = Cookies.get("values");
     if (cookieValues) {
       return cookieValues.split(",").map(parseFloat);
     } else {
-      return [0, 0]; // 기본값 설정
+      return [0, 0];
     }
   });
 
   const [autoMode, setAutoMode] = useState(() => {
     const cookieAutoMode = Cookies.get("autoMode");
-    if (cookieAutoMode == "false") {
+    if (cookieAutoMode === "false") {
       return false;
     } else {
       return true;
@@ -159,13 +165,26 @@ function MainPage() {
   return (
     <>
       <div className="setting-container">
-        <button className="setting" onClick={handleChartButtonClick}>
-          김프 차트
-        </button>
-        <button className="setting" onClick={handleRefreshButtonClick}>
-          <ImCog />
-        </button>
+        <div className="btn-setting-container">
+          <button className="setting" onClick={handleChartButtonClick}>
+            김프 차트
+          </button>
+          <button className="setting" onClick={handleRefreshButtonClick}>
+            <ImCog />
+          </button>
+        </div>
+        <div className="top-view">
+          {top.map((crypto, index) => (
+            <div key={crypto.id} className="top-item">
+              <p>{index + 1}. </p>
+              <img src={crypto.img_link} alt={crypto.name} />
+              <p>{crypto.name}</p>
+              <p className="count">{crypto.view_count}회</p>
+            </div>
+          ))}
+        </div>
       </div>
+
       <SearchBar search={search} setSearch={setSearch} />
       <div className="table-container">
         <Option exchange={exchange} />

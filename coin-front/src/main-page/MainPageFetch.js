@@ -1,38 +1,46 @@
 import axios from "axios";
 
-const dataList = [
-  {
-    id: 1,
-    img_link: "https://static.upbit.com/logos/BTC.png",
-    ticker: "BTC",
-    name: "비트코인",
-  },
-  {
-    id: 2,
-    img_link: "https://static.upbit.com/logos/ETH.png",
-    ticker: "ETH",
-    name: "이더리움",
-  },
-  {
-    id: 3,
-    img_link: "https://static.upbit.com/logos/DOGE.png",
-    ticker: "DOGE",
-    name: "도지코인",
-  },
-  {
-    id: 4,
-    img_link: "https://static.upbit.com/logos/SHIB.png",
-    ticker: "SHIB",
-    name: "시바이누",
-  },
-];
+// const dataList = [
+//   {
+//     id: 1,
+//     img_link: "https://static.upbit.com/logos/BTC.png",
+//     ticker: "BTC",
+//     name: "비트코인",
+//   },
+//   {
+//     id: 2,
+//     img_link: "https://static.upbit.com/logos/ETH.png",
+//     ticker: "ETH",
+//     name: "이더리움",
+//   },
+//   {
+//     id: 3,
+//     img_link: "https://static.upbit.com/logos/DOGE.png",
+//     ticker: "DOGE",
+//     name: "도지코인",
+//   },
+//   {
+//     id: 4,
+//     img_link: "https://static.upbit.com/logos/SHIB.png",
+//     ticker: "SHIB",
+//     name: "시바이누",
+//   },
+// ];
 
-//let dataList = null;
+let dataList = null;
 
 export async function getDataList() {
   const response = await fetch(`http://${process.env.REACT_APP_IP}/coin-list`);
   const body = await response.json();
   return body;
+}
+
+export async function getCoinListMostView() {
+  const newdataList = await getDataList();
+  newdataList.sort((a, b) => b.view_count - a.view_count);
+  const top = newdataList.slice(0, 5);
+  
+  return top;
 }
 
 export async function getCoinList() {
@@ -100,15 +108,15 @@ async function getPriceBinance(ticker) {
 }
 
 export async function getExchangeRate() {
-  // try {
-  //   const response = await fetch(
-  //     `http://${process.env.REACT_APP_IP}/exchange-rate`
-  //   );
-  //   const body = await response.json();
-  //   return body.exchangeRate;
-  // } catch {
-  //   console.log("환율 내놔");
-  //   return 1000;
-  // }
+  try {
+    const response = await fetch(
+      `http://${process.env.REACT_APP_IP}/exchange-rate`
+    );
+    const body = await response.json();
+    return body.exchangeRate;
+  } catch {
+    console.log("환율 내놔");
+    return 1000;
+  }
   return 1070;
 }
