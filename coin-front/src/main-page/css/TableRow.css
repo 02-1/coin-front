@@ -3,6 +3,9 @@
   width: 1000px;
   border-bottom: 1px #f1f3f6 solid;
 }
+.coin-table-row:hover{
+  cursor: pointer;
+}
 
 .cells {
   width: 1000px;

@@ -179,6 +179,9 @@ label {
   background-color: white;
   height: 25px;
 }
+.setting:hover{
+  cursor: pointer;
+}
 .btn-setting-container {
   display: flex;
 }

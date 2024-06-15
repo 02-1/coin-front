@@ -97,7 +97,7 @@ function Appbar({ rowData }) {
               rgbColor={rgbColor}
             />
             <CustomTab
-              text="이때.."
+              text="과거 가격"
               onClick={() => handleTabClick("/past-price")}
               rgbColor={rgbColor}
             />
