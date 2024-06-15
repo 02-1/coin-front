@@ -217,7 +217,7 @@ function MainPage() {
             />
             <div className="SliderPage">
               <h5>
-                차트 색 범위 설정 (
+                코인 정보 색 설정 (
                 <label>
                   auto:
                   <input
