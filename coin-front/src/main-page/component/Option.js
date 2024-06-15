@@ -1,9 +1,7 @@
 import { toFormattedString } from "../../Format";
 import Clock from "./Clock";
 
-function Option({
-  exchange,
-}) {
+function Option({ exchange }) {
   return (
     <div className="option">
       <div className="clock">
@@ -12,7 +10,7 @@ function Option({
       <div className="option-right">
         <p className="rating">
           <span>환율 : </span>
-          {toFormattedString(exchange)}
+          {toFormattedString(exchange)}원
         </p>
       </div>
     </div>

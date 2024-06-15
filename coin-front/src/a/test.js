@@ -4,7 +4,7 @@ import { init, dispose } from "klinecharts";
 import getInitialDataList from "../price-page/utils/getInitialDataList";
 import getColors from "../price-page/utils/getColors";
 import "../price-page/chart/chart.css";
-import "./app-test.scss"
+import "./app-test.scss";
 
 const TestPage = () => {
   const [tradingViewTheme, setTradingViewTheme] = useState("Light");
@@ -103,13 +103,20 @@ const TestPage = () => {
     <div className="hing-container">
       <div
         id="kimchipremium"
-        style={{ width: "640px", height: "500px", margin: "0 0 0 30px"}}
+        style={{ width: "640px", height: "500px", margin: "0 0 0 30px" }}
       ></div>
-    
+
       <div className="app-test">
-        <Layout >
+        <Layout>
           <div id="coin-chart" className="coin-chart" />
         </Layout>
+        <div className="chart-info">
+          과거의 해외 거래소와 국내 거래소 간의 시세차이(김치 프리미엄)에 대한
+          정보는 접근성이 좋지 못한데, 이러한 과거의 김치프리미엄 데이터를 가장
+          대표적인 코인 (비트코인)과 배치하여, 김치프리미엄의 변동성에 따라
+          비트코인의 변동성은 어떠한 영향이 있었는지 보여줌으로써 투자자에게 좀
+          더 안전한 투자를 보장해줌.
+        </div>
       </div>
     </div>
   );

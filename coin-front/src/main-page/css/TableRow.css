@@ -2,9 +2,11 @@
   margin: 0 auto;
   width: 1000px;
   border-bottom: 1px #f1f3f6 solid;
+  transition: 0.275s;
 }
 .coin-table-row:hover{
   cursor: pointer;
+  background-color: #f1f3f6;
 }
 
 .cells {

@@ -117,6 +117,10 @@ label {
   justify-content: center;
   align-items: center;
 }
+.top-item p{
+  font-size: 16px;
+
+}
 
 .close-btn {
   color: black;
@@ -183,7 +187,9 @@ label {
   cursor: pointer;
 }
 .btn-setting-container {
+  margin-top: 8px;
   display: flex;
+  
 }
 .setting:nth-child(2) {
   border: none;
@@ -303,8 +309,8 @@ label {
 }
 
 .top-item {
-  width: 140px;
-  height: 25px;
+  width: 180px;
+  height: 30px;
   align-items: center;
   display: flex;
 }

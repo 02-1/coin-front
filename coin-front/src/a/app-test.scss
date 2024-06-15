@@ -1,8 +1,9 @@
 .app-test {
   margin-top: 32px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   padding: 15px;
   .chart-container {
@@ -26,4 +27,12 @@
       overflow: hidden;
     }
   }
+}
+.chart-info{
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid gray;
+  margin-top: 16px;
+  text-align: center;
+  width: 410px;
 }

@@ -176,6 +176,7 @@ function MainPage() {
             <ImCog />
           </button>
         </div>
+
         <div className="top-view">
           {top.map((crypto, index) => (
             <div key={crypto.id} className="top-item">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TableRow from "./TableRow";
-
+import axios from "axios";
 
 function TableList({ list, autoMode, options }) {
   const calculateAverageGapPercent = () => {
@@ -25,7 +25,9 @@ function TableList({ list, autoMode, options }) {
 
   const handleRowClick = (rowData) => {
     const url = "/prices";
-
+    axios.get(
+      `http://${process.env.REACT_APP_IP}/coin-viewed?symbol=${rowData.ticker}`
+    );
     const params = new URLSearchParams(rowData).toString();
     window.open(`${url}?${params}`, `_blank`);
   };
