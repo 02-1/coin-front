@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { init, dispose } from "klinecharts";
 import "./chart.css";
 import Layout from "../Layout";
 import getInitialDataList from "../utils/getInitialDataList";
 import getColors from "../utils/getColors";
 
-const CoinChart = ({name, ticker}) => {
+const CoinChart = ({ name, ticker }) => {
   const [selectedItem, setSelectedItem] = useState("day");
   const [selectedLocation, setSelectedLocation] = useState("국내");
+  
+  const chartRef1 = useRef(null);
+  const chartRef2 = useRef(null);
 
   const handleChange = (event) => {
     setSelectedItem(event.target.value);
@@ -18,24 +21,38 @@ const CoinChart = ({name, ticker}) => {
   };
 
   useEffect(() => {
-    const chart = init("coin-chart");
+    if (!chartRef1.current || !chartRef2.current) return;
 
-    chart.setStyles(getColors());
+    const chart1 = init(chartRef1.current);
+    const chart2 = init(chartRef2.current);
+
+    chart1.setStyles(getColors());
+    chart2.setStyles(getColors());
 
     const fetchData = async () => {
-      const dataList = await getInitialDataList({
+      const dataList1 = await getInitialDataList({
         selectedItem,
-        selectedLocation,
+        selectedLocation: "국내",
         ticker,
       });
-      chart.applyNewData(dataList);
+      chart1.applyNewData(dataList1);
+
+      const dataList2 = await getInitialDataList({
+        selectedItem,
+        selectedLocation: "해외",
+        ticker,
+      });
+      chart2.applyNewData(dataList2);
     };
     fetchData();
     console.log("차트 초기화 및 데이터 적용 완료");
 
     return () => {
-      if (chart) {
-        dispose(chart);
+      if (chart1) {
+        dispose(chart1);
+      }
+      if (chart2) {
+        dispose(chart2);
       }
     };
   }, [selectedItem, selectedLocation, ticker]);
@@ -43,20 +60,6 @@ const CoinChart = ({name, ticker}) => {
   return (
     <div>
       <div className="select-container">
-        <div>
-          <button
-            className={selectedLocation === "국내" ? "selected-location" : ""}
-            onClick={() => handleLocationChange("국내")}
-          >
-            국내
-          </button>
-          <button
-            className={selectedLocation === "해외" ? "selected-location" : ""}
-            onClick={() => handleLocationChange("해외")}
-          >
-            해외
-          </button>
-        </div>
         <select value={selectedItem} onChange={handleChange}>
           {["minute", "hour", "day"].map((item, index) => (
             <option key={index} value={item}>
@@ -65,9 +68,14 @@ const CoinChart = ({name, ticker}) => {
           ))}
         </select>
       </div>
-      <Layout title={`${name} Chart`}>
-        <div id="coin-chart" className="coin-chart" />
-      </Layout>
+      <div className="chart-list">
+        <Layout title={`국내 Chart`}>
+          <div ref={chartRef1} className="coin-chart" />
+        </Layout>
+        <Layout title={`해외 Chart`}>
+          <div ref={chartRef2} className="coin-chart" />
+        </Layout>
+      </div>
     </div>
   );
 };

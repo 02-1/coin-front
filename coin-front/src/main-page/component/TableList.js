@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TableRow from "./TableRow";
 
+
 function TableList({ list, autoMode, options }) {
   const calculateAverageGapPercent = () => {
     if (list.length === 0) return 0;

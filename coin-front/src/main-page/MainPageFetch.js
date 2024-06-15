@@ -39,7 +39,6 @@ export async function getCoinListMostView() {
   const newdataList = await getDataList();
   newdataList.sort((a, b) => b.view_count - a.view_count);
   const top = newdataList.slice(0, 5);
-  
   return top;
 }
 
