@@ -21,7 +21,13 @@ function TableList({ list, autoMode, options }) {
     } else {
       setValues(options);
     }
-  }, [autoMode]);
+  }, [autoMode, averageGapPercent, options]);
+
+  useEffect(() => {
+    if (autoMode) {
+      console.log('Updated values in autoMode:', [0, averageGapPercent]);
+    }
+  }, [values, autoMode, averageGapPercent]);
 
   const handleRowClick = (rowData) => {
     const url = "/prices";
