@@ -202,7 +202,7 @@ export default function PastPricePage() {
           {priceDifference !== null && (
             <>
               <div style={getColorStyle(priceDifference)}>
-                가격 차이:{" "}
+                개당 가격 차이:{" "}
                 {numberWithCommas(parseFloat(priceDifference.toFixed(7)))} 원
               </div>
               <div style={getColorStyle(priceDifferencePercentage)}>
