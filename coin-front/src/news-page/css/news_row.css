@@ -1,0 +1,36 @@
+.news_container{
+    padding: 0 50px;
+    margin: 0 auto;
+    width: 700px;
+    display: flex;
+    align-items: center;
+}
+.news_img{
+    margin: 10px;
+    width: 150px;
+    height: 100%;
+    
+}
+.text_content{
+    overflow: hidden; /* 추가 */
+    text-overflow: ellipsis;
+}
+.news_header{
+    font-size: 14px;
+    color: grey;
+    padding: 16px 
+}
+.news_body{
+    font-size: 20px;
+    font-weight: bolder;
+    padding: 0px 16px;
+}
+.news_footer{
+    padding: 16px;
+    font-weight: 500;
+}
+.news_container:hover{
+    cursor: pointer;
+    background-color: rgb(210, 231, 250);
+    transition: 0.3s;
+}

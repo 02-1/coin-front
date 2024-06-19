@@ -1,0 +1,33 @@
+.tab_container {
+    margin: 0px 16px;
+    padding: 0px 16px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(62, 62, 62);
+  }
+  
+  .tab_container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--after-bg-color, black); /* Default to black if --after-bg-color is not set */
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+  
+  .tab_container:hover::after {
+    width: 100%;
+    left: 0;
+  }
+  
+  .tab_container:hover {
+    cursor: pointer;
+  }
+  

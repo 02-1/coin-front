@@ -1,0 +1,78 @@
+.header {
+  margin: 0 auto;
+  width: 1000px;
+  height: 50px;
+  position: relative;
+  border-top: 1px #f1f3f6 solid;
+  border-bottom: 1px #f1f3f6 solid;
+}
+
+.header > .cell {
+  text-align: end;
+  height: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 50px;
+  position: absolute;
+  color: #9196a1;
+  word-wrap: break-word;
+}
+
+.cell:nth-child(1) {
+  text-align: center;
+  width: 30px;
+}
+
+.header > .cell:nth-child(1) {
+  left: 10px;
+}
+
+.cell:nth-child(2) {
+  text-align: start;
+  left: 100px;
+  width: 300px;
+}
+
+.cell:nth-child(3) {
+  left: 350px;
+  width: 180px;
+}
+
+.cell:nth-child(4) {
+  left: 550px;
+  width: 180px;
+}
+
+.coin-table-row .cell:nth-child(3) {
+  left: 340px;
+  width: 180px;
+}
+
+.coin-table-row .cell:nth-child(4) {
+  left: 540px;
+  width: 180px;
+}
+
+.cell:nth-child(5) {
+  left: 780px;
+  width: 120px;
+}
+
+.cell:nth-child(6) {
+  left: 900px;
+  width: 100px;
+}
+
+.coin-table-row .cell:nth-child(5) {
+  left: 770px;
+  width: 120px;
+}
+
+.coin-table-row .cell:nth-child(6) {
+  left: 890px;
+  width: 100px;
+}
+
+.arrow-none {
+  color: white;
+}
